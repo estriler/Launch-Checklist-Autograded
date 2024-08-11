@@ -4,14 +4,17 @@ window.addEventListener("load", function() {
 
     let form = document.querySelector("form");
     form.addEventListener("submit", function(event) {
-        let pilotNameInput = document.querySelector("input[name=pilotName]");
-        let copilotNameInput = document.querySelector("input[name=copilotName");
-        let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
-        let cargoMassInput = document.querySelector("input[name=cargoMass]");
-        if(pilotNameInput.value === "" || copilotNameInput.value === "" || fuelLevelInput.value === "" || cargoMassInput.value === ""){
-            alert("All fields are required!");
-            event.preventDefault();
-        }
+        event.preventDefault();
+        let pilot = document.querySelector("input[name=pilotName]").value;
+        let copilot = document.querySelector("input[name=copilotName").value;
+        let fuelLevel = document.querySelector("input[name=fuelLevel]").value;
+        let cargoLevel = document.querySelector("input[name=cargoMass]").value;
+        let list = document.getElementById("faultyItems");
+        // if(pilotNameInput.value === "" || copilotNameInput.value === "" || fuelLevelInput.value === "" || cargoMassInput.value === ""){
+        //     alert("All fields are required!");
+        //     event.preventDefault();
+        // }
+        formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel);
     });
 
     let listedPlanets;
