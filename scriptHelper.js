@@ -32,6 +32,11 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     let copilotStatus = document.getElementById('copilotStatus');
     let fuelStatus = document.getElementById('fuelStatus');
     let cargoStatus = document.getElementById('cargoStatus');
+    let faultyItems = document.getElementById('faultyItems');
+    let launchStatus = document.getElementById('launchStatus');
+    let pilotsReady = false;
+    let fuelReady = true;
+    let cargoReady = true;
 
     if(validateInput(pilot) === "Empty" || validateInput(copilot) === "Empty" || validateInput(fuelLevel) === "Empty" || validateInput(cargoLevel) === "Empty"){
         alert("All fields are required!");
@@ -42,6 +47,25 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     }else{
         pilotStatus.innerHTML = `Pilot ${pilot} is ready!`;
         copilotStatus.innerHTML = `Co-pilot ${copilot} is ready!`;
+        pilotsReady = true;
+    }
+    if(Number(fuelLevel) < 10000){
+        faultyItems.style.visibility = "visible";
+        fuelStatus.innerHTML = "Fuel level too low for launch!";
+        launchStatus.innerHTML = "Shuttle not ready for launch";
+        launchStatus.style.color = "red";
+        fuelReady = false;
+    }
+    if(Number(cargoLevel) > 10000){
+        faultyItems.style.visibility = "visible";
+        cargoStatus.innerHTML = "Cargo mass to large to launch!";
+        launchStatus.innerHTML = "Shuttle not ready for launch";
+        launchStatus.style.color = "red";
+        cargoReady = false;
+    }
+    if(pilotsReady && fuelReady && cargoReady){
+        launchStatus.style.color = "green";
+        launchStatus.innerHTML = "Shuttle is ready for launch"
     }
  }
  
